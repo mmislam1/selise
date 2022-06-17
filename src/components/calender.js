@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-
+import Modal from "./Modal.js";
 
 const Calender = (props) => {
   const date = new Date();
   const [month, setMonth] = useState(date.getMonth())
+  const [modalOpen,setModalOpen]=useState(false)
   useEffect(() => { }, [month])
 
   date.setDate(1)
@@ -48,18 +49,34 @@ const Calender = (props) => {
 let counta=-1;
 
 const list=months.map((month)=>{counta+=1;
-  let sel=''
-  if(counta===date.getMonth()){
-sel='selected';
-  }
+  
+  
   return <option value={counta} >{month}</option>})
 
 
   return (
-    <div><select value={date.getMonth()} className='selectMonth' name='selectMonth'>
+    <div><span className='topbar'><select value={date.getMonth()} className='selectMonth' name='selectMonth'>
 
-      {list}
-    </select></div>
+    {list}
+  </select>
+  
+  <button
+        className="openModalBtn"
+        onClick={() => {
+          setModalOpen(true);
+        }}
+      >
+        Create Appointment
+      </button>
+
+      {modalOpen && <Modal setOpenModal={setModalOpen} />}
+
+  </span>
+    <div className="dayscontainer">
+      
+    </div>
+    
+    </div>
   )
 }
 
