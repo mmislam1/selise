@@ -52,6 +52,22 @@ const list=months.map((month)=>{counta+=1;
   
   
   return <option value={counta} >{month}</option>})
+  
+ const dayList=[]
+
+
+  for(let i=1;i<43;i++){
+ if(i<firstDayIndex){
+dayList[i-1]=0
+ }
+ if(i>=firstDayIndex && i<=(firstDayIndex+lastDay)){
+  dayList[i-1]=i-firstDayIndex
+ }
+
+ if(i>(firstDayIndex+lastDay)){
+  dayList[i-1]=0
+ }
+  }
 
 
   return (
@@ -73,7 +89,7 @@ const list=months.map((month)=>{counta+=1;
 
   </span>
     <div className="dayscontainer">
-      
+      {dayList.map((day)=>{if(day===0){return <div className='dayBlock'></div>}else{return <div className='dayBlock'><h4>{day}</h4></div>}})}
     </div>
     
     </div>
